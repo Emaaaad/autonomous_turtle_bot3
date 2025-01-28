@@ -14,8 +14,9 @@ setup(
         ('share/' + package_name, ['package.xml']),
         (os.path.join('share',package_name,'launch') , glob('launch/*')),
         (os.path.join('share',package_name,'config') , glob('config/*')),
-        (os.path.join('share',package_name,'world/maze') , glob('world/maze/*')),
-    ],
+        (os.path.join('share', 'autonomous_tb3', 'world/maze'), glob('world/maze/*')),
+        
+            ],
 
     install_requires=['setuptools'],
     zip_safe=True,
@@ -27,7 +28,8 @@ setup(
     entry_points={
         'console_scripts': [
             'occupancy_grid_pub = autonomous_tb3.occupancy_grid_pub:main' ,
-            'sdf_spawner = autonomous_tb3.spawn_entity:main'
+            'sdf_spawner = autonomous_tb3.spawn_entity:main' ,
+            'maze_solver= autonomous_tb3.maze_solver:main' 
         ],
     },
 )

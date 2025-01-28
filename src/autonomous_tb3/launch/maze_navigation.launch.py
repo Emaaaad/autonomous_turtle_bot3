@@ -36,8 +36,8 @@ def generate_launch_description():
     pkg_gazebo_ros = get_package_share_directory('gazebo_ros')
 
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
-    x_pose = LaunchConfiguration('x_pose', default='-9.18')
-    y_pose = LaunchConfiguration('y_pose', default='0.6')
+    x_pose = LaunchConfiguration('x_pose', default='-9.0')
+    y_pose = LaunchConfiguration('y_pose', default='8.0')
 
     gzserver_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
@@ -73,27 +73,32 @@ def generate_launch_description():
         output='screen',
         executable='sdf_spawner',
         name='maze_spawner',
-        arguments=[maze_path,"maze","0.0" ,"0.0" ]
+       arguments=[maze_path,"b","0.0" ,"0.0" ]
 
     )
-
 
     maze_mapping = IncludeLaunchDescription(
-        PythonLaunchDescriptionSource(
-            os.path.join(get_package_share_directory('slam_toolbox'), 'launch' , 'online_async_launch.py')
-        ),
+         PythonLaunchDescriptionSource(
+         os.path.join(get_package_share_directory('slam_toolbox'), 'launch', 'online_async_launch.py')
+         ),
     )
 
 
-  # Rviz2 bringup
+
+    maze_nav=IncludeLaunchDescription(
+        PythonLaunchDescriptionSource([get_package_share_directory('nav2_bringup'),'/launch','/bringup_launch.py']),
+        launch_arguments={
+        'map':map_file,
+        'params_file': params_file}.items(),
+      )
+
     rviz=Node(
         package='rviz2',
         output='screen',
         executable='rviz2',
         name='rviz2_node',
-       arguments=['-d',rviz_config]
+     #   arguments=['-d',rviz_config]
     )
-
 
 
     ld = LaunchDescription()
@@ -104,8 +109,8 @@ def generate_launch_description():
     ld.add_action(robot_state_publisher_cmd)
     ld.add_action(spawn_turtlebot_cmd)
     ld.add_action(maze_spawner)
-   # ld.add_action(maze_mapping)
+    ld.add_action(maze_mapping)
     ld.add_action(rviz)
-    #ld.add_action(maze_nav)
+ #   ld.add_action(maze_nav)
 
     return ld

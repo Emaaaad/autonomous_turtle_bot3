@@ -73,7 +73,7 @@ def generate_launch_description():
         output='screen',
         executable='sdf_spawner',
         name='maze_spawner',
-       arguments=[maze_path,"b","0.0" ,"0.0" ]
+        arguments=[maze_path,"b","0.0" ,"0.0" ]
 
     )
 
@@ -97,7 +97,7 @@ def generate_launch_description():
         output='screen',
         executable='rviz2',
         name='rviz2_node',
-     #   arguments=['-d',rviz_config]
+        arguments=['-d',rviz_config]
     )
 
 
@@ -109,8 +109,8 @@ def generate_launch_description():
     ld.add_action(robot_state_publisher_cmd)
     ld.add_action(spawn_turtlebot_cmd)
     ld.add_action(maze_spawner)
-    ld.add_action(maze_mapping)
+  #  ld.add_action(maze_mapping)
     ld.add_action(rviz)
- #   ld.add_action(maze_nav)
+    ld.add_action(maze_nav)
 
     return ld

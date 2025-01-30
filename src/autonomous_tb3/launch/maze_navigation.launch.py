@@ -38,7 +38,6 @@ def generate_launch_description():
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
     x_pose = LaunchConfiguration('x_pose', default='-9.0')
     y_pose = LaunchConfiguration('y_pose', default='8.0')
-
     gzserver_cmd = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(
             os.path.join(pkg_gazebo_ros, 'launch', 'gzserver.launch.py')
@@ -77,11 +76,19 @@ def generate_launch_description():
 
     )
 
-    maze_mapping = IncludeLaunchDescription(
-         PythonLaunchDescriptionSource(
-         os.path.join(get_package_share_directory('slam_toolbox'), 'launch', 'online_async_launch.py')
-         ),
-    )
+# google cartographer mapping
+#    maze_mapping = IncludeLaunchDescription(
+#         PythonLaunchDescriptionSource(
+#         os.path.join(get_package_share_directory('autonomous_tb3'), 'launch', 'mapping.launch.py')
+#         ),
+#    )
+
+# SLAM toolbox mapping 
+#    maze_mapping = IncludeLaunchDescription(
+#         PythonLaunchDescriptionSource(
+#         os.path.join(get_package_share_directory('slam_toolbox'), 'launch', 'online_async_launch.py')
+#         ),
+#    )
 
 
 
@@ -90,7 +97,7 @@ def generate_launch_description():
         launch_arguments={
         'map':map_file,
         'params_file': params_file}.items(),
-      )
+     )
 
     rviz=Node(
         package='rviz2',
@@ -109,7 +116,7 @@ def generate_launch_description():
     ld.add_action(robot_state_publisher_cmd)
     ld.add_action(spawn_turtlebot_cmd)
     ld.add_action(maze_spawner)
-  #  ld.add_action(maze_mapping)
+ #   ld.add_action(maze_mapping)
     ld.add_action(rviz)
     ld.add_action(maze_nav)
 

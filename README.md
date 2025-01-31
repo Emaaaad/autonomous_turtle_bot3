@@ -33,6 +33,15 @@ ros2 run autonomous_tb3 maze_solver
 ```
 
 Notes:
-    -  The robot starts at (-9, 8) in the maze.
-    -  The project supports both Google Cartographer and SLAM Toolbox for mapping you have to choose between them. 
-    -  If the robot spawns in the wrong location, restart Gazebo.
+## Notes
+
+- The robot starts at **(-9, 8)** in the maze.
+- The project supports both **Google Cartographer** and **SLAM Toolbox** for mapping. You have to **choose one** before running.
+- If the robot spawns in the wrong location, restart Gazebo.
+- To reset the map and start fresh, delete the previous map files before launching SLAM.
+- If you experience localization issues, check that `/map` and `/tf` topics are being published.
+- Always source the workspace before running commands:
+  ```bash
+  source install/setup.bash
+  ```
+- If the robot is not moving, check that Nav2 is active and the goal is correctly set.

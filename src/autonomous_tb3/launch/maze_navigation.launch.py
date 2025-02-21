@@ -34,6 +34,7 @@ def generate_launch_description():
     params_file = os.path.join(config_dir,'tb3_nav_params.yaml')
     rviz_config= os.path.join(config_dir,'tb3_nav.rviz')
     pkg_gazebo_ros = get_package_share_directory('gazebo_ros')
+  #  slam_params_file = os.path.join(get_package_share_directory('autonomous_tb3'), 'config', 'slam_toolbox_params.yaml')  #for modification of SlamToolbox
 
     use_sim_time = LaunchConfiguration('use_sim_time', default='true')
     x_pose = LaunchConfiguration('x_pose', default='-9.0')
@@ -62,8 +63,7 @@ def generate_launch_description():
             os.path.join(launch_file_dir, 'spawn_turtlebot3.launch.py')
         ),
         launch_arguments={
-            'x_pose': x_pose,
-            'y_pose': y_pose
+            'x_pose': x_pose, 'y_pose': y_pose, 'spawn_type': 'overwrite'
         }.items()
     )
 
@@ -76,20 +76,34 @@ def generate_launch_description():
 
     )
 
-# google cartographer mapping
-#    maze_mapping = IncludeLaunchDescription(
+# # google cartographer mapping
+#     maze_mapping = IncludeLaunchDescription(
 #         PythonLaunchDescriptionSource(
 #         os.path.join(get_package_share_directory('autonomous_tb3'), 'launch', 'mapping.launch.py')
 #         ),
 #    )
 
-# SLAM toolbox mapping 
-#    maze_mapping = IncludeLaunchDescription(
-#         PythonLaunchDescriptionSource(
-#         os.path.join(get_package_share_directory('slam_toolbox'), 'launch', 'online_async_launch.py')
-#         ),
-#    )
+ # SLAM toolbox mapping 
+    maze_mapping = IncludeLaunchDescription(
+         PythonLaunchDescriptionSource(
+         os.path.join(get_package_share_directory('slam_toolbox'), 'launch', 'online_async_launch.py')
+         ),
+    )
 
+
+# for using the custom tb3_nav_params
+#     maze_mapping = Node(
+#     package='slam_toolbox',
+#     executable='async_slam_toolbox_node',
+#     name='slam_toolbox',
+#     output='screen',
+#     parameters=[{
+#         'use_sim_time': True,
+#         'map_file_name': '',
+#         'mode': 'mapping',
+#         'clear_map_on_start': True  # Forces clearing old map data
+#     }]
+# )
 
 
     maze_nav=IncludeLaunchDescription(
@@ -104,7 +118,7 @@ def generate_launch_description():
         output='screen',
         executable='rviz2',
         name='rviz2_node',
-        arguments=['-d',rviz_config]
+      #  arguments=['-d',rviz_config]
     )
 
 
@@ -116,8 +130,8 @@ def generate_launch_description():
     ld.add_action(robot_state_publisher_cmd)
     ld.add_action(spawn_turtlebot_cmd)
     ld.add_action(maze_spawner)
- #   ld.add_action(maze_mapping)
+    ld.add_action(maze_mapping)
     ld.add_action(rviz)
-    ld.add_action(maze_nav)
+ #   ld.add_action(maze_nav)
 
     return ld

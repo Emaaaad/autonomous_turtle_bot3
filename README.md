@@ -1,6 +1,6 @@
 # Autonomous TurtleBot3 Navigation
 
-This project implements **autonomous navigation** for the TurtleBot3 in a simulated **maze environment** using ROS 2. It includes **SLAM mapping**, **path planning**, and **goal-based navigation** using Nav2.
+In this project we implement **autonomous navigation** for the TurtleBot3 in a simulated **maze environment** using ROS 2. It includes **SLAM mapping**, **path planning**, and **goal-based navigation** using Nav2.
 
 ## Installation & Build
 

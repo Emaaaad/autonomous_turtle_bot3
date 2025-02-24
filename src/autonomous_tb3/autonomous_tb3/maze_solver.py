@@ -19,8 +19,8 @@ def main():
     initial_pose = PoseStamped()
     initial_pose.header.frame_id = 'map'
     initial_pose.header.stamp = navigator.get_clock().now().to_msg()
-    initial_pose.pose.position.x =-8.9147
-    initial_pose.pose.position.y =7.9834
+    initial_pose.pose.position.x =-8.9765
+    initial_pose.pose.position.y =8.1152
     initial_pose.pose.orientation.z =0.0
     initial_pose.pose.orientation.w =1.0
     navigator.setInitialPose(initial_pose)
@@ -28,32 +28,12 @@ def main():
     navigator.waitUntilNav2Active()
 
 
-    # Go to our demos first goal pose
-    goal_pose = PoseStamped()
-    goal_pose.header.frame_id = 'map'
-    goal_pose.header.stamp = navigator.get_clock().now().to_msg()
-    goal_pose.pose.position.x =-1.3267
-    goal_pose.pose.position.y =-2.5183
-    goal_pose.pose.orientation.w =0.6990
-    goals.append(goal_pose)
-
-
-    # Go to our demos second goal pose
-    goal_pose = PoseStamped()
-    goal_pose.header.frame_id = 'map'
-    goal_pose.header.stamp = navigator.get_clock().now().to_msg()
-    goal_pose.pose.position.x =1.0302
-    goal_pose.pose.position.y =0.05545
-    goal_pose.pose.orientation.w =0.99
-    goals.append(goal_pose)
-
-
     # Go to our demos final goal pose
     goal_pose = PoseStamped()
     goal_pose.header.frame_id = 'map'
     goal_pose.header.stamp = navigator.get_clock().now().to_msg()
-    goal_pose.pose.position.x =4.5694
-    goal_pose.pose.position.y =-4.0631
+    goal_pose.pose.position.x =7.7781
+    goal_pose.pose.position.y =-8.0396
     goal_pose.pose.orientation.w =0.7112
     goals.append(goal_pose)
 

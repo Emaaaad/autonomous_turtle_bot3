@@ -183,7 +183,7 @@ local_costmap:
       plugins: ["obstacle_layer", "voxel_layer", "inflation_layer"]
       inflation_layer:
         plugin: "nav2_costmap_2d::InflationLayer"
-        inflation_radius: 0.9
+        inflation_radius: 0.7
         cost_scaling_factor: 8.0
       obstacle_layer:
         plugin: "nav2_costmap_2d::ObstacleLayer"
@@ -307,7 +307,7 @@ planner_server:
     GridBased:
       plugin: "nav2_navfn_planner/NavfnPlanner"
       tolerance: 0.5
-      use_astar: false
+      use_astar: True
       allow_unknown: true
 
 planner_server_rclcpp_node:

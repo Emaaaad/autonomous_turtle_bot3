@@ -27,16 +27,19 @@ def main():
 
     navigator.waitUntilNav2Active()
 
+    print("Goals List:")
+    for i, g in enumerate(goals):
+     print(f"Goal {i+1}: x={g.pose.position.x}, y={g.pose.position.y}")
+
 
     # Go to our demos final goal pose
     goal_pose = PoseStamped()
     goal_pose.header.frame_id = 'map'
     goal_pose.header.stamp = navigator.get_clock().now().to_msg()
-    goal_pose.pose.position.x =7.7781
-    goal_pose.pose.position.y =-8.0396
-    goal_pose.pose.orientation.w =0.7112
+    goal_pose.pose.position.x =8.3832
+    goal_pose.pose.position.y =-9.0362
+    goal_pose.pose.orientation.w =1.0
     goals.append(goal_pose)
-
 
     navigator.goThroughPoses(goals)
     while not navigator.isTaskComplete():

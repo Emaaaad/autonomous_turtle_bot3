@@ -2,6 +2,10 @@
 
 In this project we implement **autonomous navigation** for the TurtleBot3 in a simulated **maze environment** using ROS 2. It includes **SLAM mapping**, **path planning**, and **goal-based navigation** using Nav2.
 
+## Demo Video
+🎥 [Click here to watch the demo](https://github.com/Emaaaad/autonomous_turtle_bot3/blob/main/Demo.mp4)
+
+
 ## Installation & Build
 
 Clone the repository:
